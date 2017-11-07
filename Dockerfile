@@ -9,6 +9,9 @@ RUN apt-get -qqy update && \
     libffi-dev libssl-dev && \
   apt-get -qqy clean && \
   pip install s3cmd python-openstackclient python-swiftclient gsutil
+  
+RUN curl https://dl.minio.io/client/mc/release/linux-amd64/mc -o /usr/bin/mc
+RUN chmod a+x /usr/bin/mc
 
 ENV DBS="" MYSQL_HOST="mysql" STORAGE_TYPE="local" PREFIX="" DAILY_CLEANUP="0" MAX_DAILY_BACKUP_FILES="7"
 ENV ACCESS_KEY="" SECRET_KEY="" BUCKET="" REGION="us-east-1"
