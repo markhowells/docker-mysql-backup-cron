@@ -8,11 +8,12 @@ RUN apt-get -qqy update && \
     mysql-client apache2-utils python-dev python-pip \
     libffi-dev libssl-dev unzip && \
   apt-get -qqy clean && \
-  pip install s3cmd python-openstackclient python-swiftclient gsutil
+  pip install python-openstackclient python-swiftclient gsutil
 
 RUN curl -L https://github.com/s3tools/s3cmd/releases/download/v2.0.1/s3cmd-2.0.1.tar.gz | tar xvz
 WORKDIR s3cmd-2.0.1
 RUN python setup.py install
+WORKDIR ..
 
 ENV DBS="" MYSQL_HOST="mysql" STORAGE_TYPE="local" PREFIX="" DAILY_CLEANUP="0" MAX_DAILY_BACKUP_FILES="7"
 ENV ACCESS_KEY="" SECRET_KEY="" BUCKET="" REGION="us-east-1"
